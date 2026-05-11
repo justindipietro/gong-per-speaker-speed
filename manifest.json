@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Gong Per-Speaker Playback Speed",
+  "version": "1.0.1",
+  "description": "Automatically change Gong call playback speed based on who is currently speaking.",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "https://*.app.gong.io/*"
+  ],
+  "icons": {
+    "128": "icon.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Gong Per-Speaker Speed",
+    "default_icon": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.app.gong.io/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; base-uri 'self'; frame-ancestors 'none'"
+  }
+}

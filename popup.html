@@ -1,0 +1,268 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      :root {
+        --bg: #ffffff;
+        --surface: #f7f8fa;
+        --border: #e5e7eb;
+        --border-strong: #d1d5db;
+        --text: #111827;
+        --text-muted: #6b7280;
+        --text-faint: #9ca3af;
+        --accent: #6366f1;
+        --accent-soft: #eef2ff;
+        --danger: #dc2626;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        font: 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+        width: 340px;
+        margin: 0;
+        padding: 0;
+        color: var(--text);
+        background: var(--bg);
+      }
+
+      .header {
+        padding: 16px 18px 14px;
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+        color: #fff;
+      }
+      .header h1 {
+        font-size: 15px;
+        font-weight: 600;
+        margin: 0 0 2px;
+        letter-spacing: -0.01em;
+      }
+      .header p {
+        margin: 0;
+        font-size: 12px;
+        opacity: .85;
+      }
+
+      .section { padding: 14px 18px 4px; }
+      .section-label {
+        font-size: 10px;
+        font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin: 0 0 10px;
+      }
+
+      .row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 10px;
+        border-radius: 8px;
+        transition: background-color 120ms ease;
+      }
+      .row:hover { background: var(--surface); }
+      .row + .row { margin-top: 2px; }
+
+      .name {
+        flex: 1;
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--text);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .name.is-default { color: var(--text-muted); font-style: italic; }
+
+      .stepper {
+        display: flex;
+        align-items: center;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 7px;
+        overflow: hidden;
+        height: 28px;
+      }
+      .stepper:focus-within {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px var(--accent-soft);
+      }
+      .stepper button {
+        width: 24px;
+        height: 100%;
+        border: 0;
+        background: transparent;
+        color: var(--text-muted);
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 100ms ease, color 100ms ease;
+        padding: 0;
+      }
+      .stepper button:hover { background: var(--border); color: var(--text); }
+      .stepper button:active { background: var(--border-strong); }
+      .stepper input {
+        width: 44px;
+        height: 100%;
+        border: 0;
+        background: transparent;
+        text-align: center;
+        font: inherit;
+        font-weight: 600;
+        font-variant-numeric: tabular-nums;
+        color: var(--text);
+        outline: none;
+        -moz-appearance: textfield;
+        padding: 0;
+      }
+      .stepper input::-webkit-outer-spin-button,
+      .stepper input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+      .unit { font-size: 11px; font-weight: 600; color: var(--text-faint); min-width: 10px; }
+
+      .pill {
+        font-size: 10px;
+        font-weight: 600;
+        padding: 2px 7px;
+        border-radius: 999px;
+        background: var(--surface);
+        color: var(--text-muted);
+        font-variant-numeric: tabular-nums;
+      }
+      .pill.fast    { background: #fef3c7; color: #92400e; }
+      .pill.faster  { background: #fed7aa; color: #9a3412; }
+      .pill.fastest { background: #fecaca; color: #991b1b; }
+      .pill.slow    { background: #dbeafe; color: #1e40af; }
+
+      .empty {
+        text-align: center;
+        padding: 20px 10px;
+        color: var(--text-faint);
+        font-style: italic;
+        font-size: 12px;
+      }
+
+      .footer {
+        margin-top: 12px;
+        padding: 14px 18px 16px;
+        border-top: 1px solid var(--border);
+        background: var(--surface);
+      }
+      .footer-title {
+        font-size: 10px;
+        font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin: 0 0 8px;
+      }
+      .hotkey-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 5px 0;
+        font-size: 11.5px;
+        color: var(--text-muted);
+      }
+      .hotkey-row .desc { flex: 1; }
+      kbd {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 18px;
+        height: 18px;
+        padding: 0 5px;
+        background: #fff;
+        border: 1px solid var(--border-strong);
+        border-bottom-width: 2px;
+        border-radius: 4px;
+        font: 10px ui-monospace, "SF Mono", Menlo, monospace;
+        font-weight: 600;
+        color: var(--text);
+      }
+      .kbd-group { display: inline-flex; gap: 2px; }
+
+      .clear-btn {
+        margin-top: 12px;
+        width: 100%;
+        background: transparent;
+        border: 1px solid var(--border-strong);
+        color: var(--danger);
+        cursor: pointer;
+        font-size: 11.5px;
+        font-weight: 500;
+        padding: 7px 10px;
+        border-radius: 7px;
+        transition: all 120ms ease;
+      }
+      .clear-btn:hover {
+        background: #fef2f2;
+        border-color: var(--danger);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Per-Speaker Playback Speed</h1>
+      <p>Auto-adjusts speed by who's talking</p>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Global default</div>
+      <div class="row" id="default-row">
+        <span class="name">Default speed</span>
+        <div class="stepper">
+          <button type="button" data-step="-0.25" aria-label="Decrease">−</button>
+          <input id="default-rate" type="number" min="0.25" max="4" step="0.25" value="1" />
+          <button type="button" data-step="0.25" aria-label="Increase">+</button>
+        </div>
+        <span class="unit">×</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Speakers on this call</div>
+      <div id="list"><div class="empty">Loading speakers…</div></div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-title">Hotkeys (on the Gong page)</div>
+
+      <div class="hotkey-row">
+        <span class="kbd-group"><kbd>]</kbd><kbd>[</kbd></span>
+        <span class="desc">Current speaker ±0.25×</span>
+      </div>
+      <div class="hotkey-row">
+        <span class="kbd-group"><kbd>⇧</kbd><kbd>]</kbd><kbd>[</kbd></span>
+        <span class="desc">Default ±0.25×</span>
+      </div>
+      <div class="hotkey-row">
+        <span class="kbd-group"><kbd>\</kbd></span>
+        <span class="desc">Reset current to default</span>
+      </div>
+
+      <button id="clear-overrides" class="clear-btn">Clear all speaker overrides</button>
+
+      <div class="footer-title" style="margin-top:14px;">Diagnostics</div>
+      <div style="display:flex; gap:6px;">
+        <button id="download-logs" class="clear-btn" style="color: var(--text); flex:1;">Download logs</button>
+        <button id="clear-logs" class="clear-btn" style="color: var(--text-muted); flex:0 0 auto; width:auto; padding:7px 10px;">Clear</button>
+      </div>
+      <div id="log-status" style="margin-top:6px; font-size:11px; color: var(--text-faint); text-align:center;"></div>
+
+      <div style="margin-top:14px; padding-top:10px; border-top:1px solid var(--border); text-align:center; font-size:10.5px; color: var(--text-faint); letter-spacing:0.02em;">
+        Open Sourced by
+        <a href="https://www.linkedin.com/in/justindipietro/" target="_blank" rel="noopener noreferrer" style="color: var(--text-muted); text-decoration: none; border-bottom: 1px dotted var(--border-strong);">Justin DiPietro</a>
+        at
+        <a href="https://glia.com" target="_blank" rel="noopener noreferrer" style="color: var(--text-muted); text-decoration: none; border-bottom: 1px dotted var(--border-strong);">Glia</a>
+        · MIT
+      </div>
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
