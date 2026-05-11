@@ -1,5 +1,9 @@
 # Gong Per-Speaker Playback Speed
 
+<p align="center">
+  <img src="docs/popup.png" alt="Gong Per-Speaker Playback Speed popup" width="340" />
+</p>
+
 A Chrome extension that auto-adjusts Gong call playback speed based on who is currently talking. Set a slower rate for a customer you want to hear clearly, and a faster rate for an internal teammate — the extension switches between them in real time as the call plays.
 
 Built because Gong's single playback-rate control treats every speaker the same, which is rarely what you actually want when reviewing a call.
