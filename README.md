@@ -9,6 +9,8 @@ A Chrome extension that auto-adjusts Gong call playback speed based on who is cu
 
 Built because Gong's single playback-rate control treats every speaker the same, which is rarely what you actually want when reviewing a call.
 
+> ⚠️ **Heads up:** this extension works by reading Gong's call-page DOM. If Gong changes their markup or player internals, it can break at any time without warning. The real goal here is to get per-speaker playback speed shipped natively inside Gong — this is a stopgap. If you work at Gong: please build this in. Happy to share notes.
+
 ## What it does
 
 - Detects the current speaker by reading Gong's speaker timeline in the DOM.
